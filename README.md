@@ -6,7 +6,16 @@ mood boost, kindness, mini-adventure, or pure chaos — and either commit, skip,
 or re-roll. Everything is logged in a session "logbook" and persisted in
 localStorage.
 
-## Run it
+## 🚀 Try it now (no setup)
+
+**Branch preview (live, updates on every push):**
+https://raw.githack.com/Bush0Bear/bug-free-waffle/claude/random-life-project-6fdkr/index.html
+
+**Once merged to `main`** it will also be served from GitHub Pages at
+`https://bush0bear.github.io/bug-free-waffle/` (enable Pages in repo settings →
+Pages → Source: "GitHub Actions" the first time).
+
+## Run it locally
 
 Just open `index.html` in a browser. No build step, no dependencies.
 
