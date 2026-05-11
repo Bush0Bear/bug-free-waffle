@@ -155,7 +155,26 @@ const els = {
   streakCount: document.getElementById("streakCount"),
   vibeScore: document.getElementById("vibeScore"),
   toast: document.getElementById("toast"),
+  welcome: document.getElementById("welcome"),
+  beginBtn: document.getElementById("beginBtn"),
+  steps: document.querySelectorAll(".step"),
+  promptHint: document.getElementById("promptHint"),
+  decisionRow: document.getElementById("decisionRow"),
 };
+
+function setStep(n) {
+  els.steps.forEach((s) => {
+    const v = Number(s.dataset.step);
+    s.classList.toggle("active", v === n);
+    s.classList.toggle("done", v < n);
+  });
+}
+
+function dismissWelcome() {
+  if (!els.welcome) return;
+  els.welcome.classList.add("hidden");
+  setTimeout(() => els.welcome.remove(), 400);
+}
 
 function load() {
   try {
@@ -253,6 +272,9 @@ function pickRandom(cat, exclude = null) {
 function spin() {
   if (state.spinning) return;
   state.spinning = true;
+  setStep(2);
+  if (els.promptHint) els.promptHint.classList.add("hidden");
+  els.spinBtn.classList.remove("pulse");
   setControls({ canSpin: false, canDecide: false });
   els.wheel.classList.add("spinning");
   els.wheel.classList.remove("landed");
@@ -277,6 +299,8 @@ function spin() {
       els.wheel.classList.remove("spinning");
       els.wheel.classList.add("landed");
       setControls({ canSpin: true, canDecide: true });
+      if (els.decisionRow) els.decisionRow.hidden = false;
+      setStep(3);
       state.spinning = false;
       renderStats();
       save();
@@ -291,11 +315,19 @@ function showToast(msg) {
   showToast._t = setTimeout(() => els.toast.classList.remove("show"), 1800);
 }
 
+function resetToSpinReady() {
+  setControls({ canSpin: true, canDecide: false });
+  if (els.decisionRow) els.decisionRow.hidden = true;
+  if (els.promptHint) els.promptHint.classList.remove("hidden");
+  els.spinBtn.classList.add("pulse");
+  setStep(2);
+}
+
 function accept() {
   if (!state.current) return;
   state.log.push({ ...state.current, status: "accepted" });
   state.current = null;
-  setControls({ canSpin: true, canDecide: false });
+  resetToSpinReady();
   renderLog();
   save();
   showToast("Logged. Go do the thing. 🫡");
@@ -305,7 +337,7 @@ function skip() {
   if (!state.current) return;
   state.log.push({ ...state.current, status: "skipped" });
   state.current = null;
-  setControls({ canSpin: true, canDecide: false });
+  resetToSpinReady();
   renderLog();
   save();
   showToast("Skipped. Next universe please.");
@@ -348,6 +380,13 @@ function exportLog() {
 }
 
 function wireEvents() {
+  if (els.beginBtn) {
+    els.beginBtn.addEventListener("click", () => {
+      dismissWelcome();
+      setStep(2);
+    });
+  }
+
   els.catBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       state.category = btn.dataset.cat;
@@ -355,6 +394,7 @@ function wireEvents() {
       save();
       if (!state.spinning && !state.current) {
         setResult({ e: POOLS[state.category].emoji, t: `${POOLS[state.category].label} — press SPIN` });
+        setStep(2);
       }
     });
   });
@@ -368,6 +408,15 @@ function wireEvents() {
 
   document.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    const welcomeOpen = els.welcome && !els.welcome.classList.contains("hidden");
+    if (welcomeOpen) {
+      if (e.code === "Enter" || e.code === "Space") {
+        e.preventDefault();
+        dismissWelcome();
+        setStep(2);
+      }
+      return;
+    }
     if (e.code === "Space" || e.code === "Enter") {
       e.preventDefault();
       if (!els.spinBtn.disabled) spin();
@@ -397,7 +446,8 @@ function init() {
   renderStats();
   renderLog();
   setControls({ canSpin: true, canDecide: false });
-  setResult({ e: "🎲", t: "Press SPIN to begin" });
+  setResult({ e: POOLS[state.category].emoji, t: `${POOLS[state.category].label} — press SPIN` });
+  setStep(1);
   wireEvents();
 }
 

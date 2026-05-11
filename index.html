@@ -9,6 +9,22 @@
 <body>
   <div class="stars" aria-hidden="true"></div>
 
+  <!-- Welcome overlay: first step in the sequence -->
+  <div class="welcome" id="welcome">
+    <div class="welcome-card">
+      <div class="welcome-emoji">🎰</div>
+      <h2>Welcome to Life Roulette</h2>
+      <p>Three steps. The universe decides the rest.</p>
+      <ol class="welcome-steps">
+        <li><span>1</span> Pick a life category</li>
+        <li><span>2</span> Spin the wheel</li>
+        <li><span>3</span> Accept it, skip it, or re-roll</li>
+      </ol>
+      <button class="huge-btn" id="beginBtn">▶ BEGIN</button>
+      <p class="welcome-hint">or press <kbd>Enter</kbd></p>
+    </div>
+  </div>
+
   <header class="topbar">
     <h1 class="logo">
       <span class="logo-emoji">🎰</span>
@@ -23,6 +39,14 @@
   </header>
 
   <main>
+    <div class="step-indicator" id="stepIndicator">
+      <div class="step active" data-step="1"><span class="step-num">1</span> Pick a category</div>
+      <div class="step-arrow">→</div>
+      <div class="step" data-step="2"><span class="step-num">2</span> Spin the wheel</div>
+      <div class="step-arrow">→</div>
+      <div class="step" data-step="3"><span class="step-num">3</span> Decide</div>
+    </div>
+
     <section class="categories" aria-label="Pick a category">
       <button class="cat-btn active" data-cat="meal">🍕 Meal</button>
       <button class="cat-btn" data-cat="activity">🎨 Activity</button>
@@ -43,12 +67,15 @@
         </div>
       </div>
 
+      <p class="prompt-hint" id="promptHint">👇 Tap SPIN to let the wheel decide</p>
       <div class="controls">
-        <button class="primary-btn" id="spinBtn">
-          <span class="btn-label">SPIN</span>
-          <span class="btn-sub">↵ or space</span>
+        <button class="primary-btn pulse" id="spinBtn">
+          <span class="btn-label">🎲 SPIN</span>
+          <span class="btn-sub">press ↵ or space</span>
         </button>
-        <button class="ghost-btn" id="acceptBtn" disabled>✓ I'll do it</button>
+      </div>
+      <div class="decision-row" id="decisionRow" hidden>
+        <button class="ghost-btn ghost-accept" id="acceptBtn" disabled>✓ I'll do it</button>
         <button class="ghost-btn" id="rerollBtn" disabled>↻ Re-roll</button>
         <button class="ghost-btn" id="skipBtn" disabled>✕ Skip</button>
       </div>
