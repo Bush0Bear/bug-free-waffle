@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Roulette - Let the Universe Decide</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <!-- Welcome overlay: first step in the sequence -->
+  <div class="welcome" id="welcome">
+    <div class="welcome-card">
+      <div class="welcome-emoji">🎰</div>
+      <h2>Welcome to Life Roulette</h2>
+      <p>Three steps. The universe decides the rest.</p>
+      <ol class="welcome-steps">
+        <li><span>1</span> Pick a life category</li>
+        <li><span>2</span> Spin the wheel</li>
+        <li><span>3</span> Accept it, skip it, or re-roll</li>
+      </ol>
+      <button class="huge-btn" id="beginBtn">▶ BEGIN</button>
+      <p class="welcome-hint">or press <kbd>Enter</kbd></p>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <h1 class="logo">
+      <span class="logo-emoji">🎰</span>
+      <span class="logo-text">Life Roulette</span>
+    </h1>
+    <p class="tagline">Stuck? Let the universe pick for you.</p>
+    <div class="stats" id="stats">
+      <span class="stat"><strong id="spinCount">0</strong> spins</span>
+      <span class="stat"><strong id="streakCount">0</strong> day streak</span>
+      <span class="stat"><strong id="vibeScore">??</strong> vibe</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="step-indicator" id="stepIndicator">
+      <div class="step active" data-step="1"><span class="step-num">1</span> Pick a category</div>
+      <div class="step-arrow">→</div>
+      <div class="step" data-step="2"><span class="step-num">2</span> Spin the wheel</div>
+      <div class="step-arrow">→</div>
+      <div class="step" data-step="3"><span class="step-num">3</span> Decide</div>
+    </div>
+
+    <section class="categories" aria-label="Pick a category">
+      <button class="cat-btn active" data-cat="meal">🍕 Meal</button>
+      <button class="cat-btn" data-cat="activity">🎨 Activity</button>
+      <button class="cat-btn" data-cat="mood">🌈 Mood Boost</button>
+      <button class="cat-btn" data-cat="kindness">💝 Kindness</button>
+      <button class="cat-btn" data-cat="adventure">🚀 Adventure</button>
+      <button class="cat-btn" data-cat="chaos">🌀 Chaos</button>
+    </section>
+
+    <section class="wheel-area">
+      <div class="wheel-frame">
+        <div class="wheel-pointer" aria-hidden="true">▼</div>
+        <div class="wheel" id="wheel">
+          <div class="wheel-result" id="wheelResult">
+            <span class="result-emoji" id="resultEmoji">🎲</span>
+            <span class="result-text" id="resultText">Press SPIN to begin</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="prompt-hint" id="promptHint">👇 Tap SPIN to let the wheel decide</p>
+      <div class="controls">
+        <button class="primary-btn pulse" id="spinBtn">
+          <span class="btn-label">🎲 SPIN</span>
+          <span class="btn-sub">press ↵ or space</span>
+        </button>
+      </div>
+      <div class="decision-row" id="decisionRow" hidden>
+        <button class="ghost-btn ghost-accept" id="acceptBtn" disabled>✓ I'll do it</button>
+        <button class="ghost-btn" id="rerollBtn" disabled>↻ Re-roll</button>
+        <button class="ghost-btn" id="skipBtn" disabled>✕ Skip</button>
+      </div>
+    </section>
+
+    <section class="logbook">
+      <div class="logbook-head">
+        <h2>📓 Today's Logbook</h2>
+        <button class="link-btn" id="clearBtn">clear history</button>
+      </div>
+      <ul id="logList" class="log-list">
+        <li class="log-empty">No spins yet. The day is wide open.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with 🎲 randomness · <button class="link-btn" id="exportBtn">export log</button></p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
