@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Roulette - Let the Universe Decide</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <h1 class="logo">
+      <span class="logo-emoji">🎰</span>
+      <span class="logo-text">Life Roulette</span>
+    </h1>
+    <p class="tagline">Stuck? Let the universe pick for you.</p>
+    <div class="stats" id="stats">
+      <span class="stat"><strong id="spinCount">0</strong> spins</span>
+      <span class="stat"><strong id="streakCount">0</strong> day streak</span>
+      <span class="stat"><strong id="vibeScore">??</strong> vibe</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="categories" aria-label="Pick a category">
+      <button class="cat-btn active" data-cat="meal">🍕 Meal</button>
+      <button class="cat-btn" data-cat="activity">🎨 Activity</button>
+      <button class="cat-btn" data-cat="mood">🌈 Mood Boost</button>
+      <button class="cat-btn" data-cat="kindness">💝 Kindness</button>
+      <button class="cat-btn" data-cat="adventure">🚀 Adventure</button>
+      <button class="cat-btn" data-cat="chaos">🌀 Chaos</button>
+    </section>
+
+    <section class="wheel-area">
+      <div class="wheel-frame">
+        <div class="wheel-pointer" aria-hidden="true">▼</div>
+        <div class="wheel" id="wheel">
+          <div class="wheel-result" id="wheelResult">
+            <span class="result-emoji" id="resultEmoji">🎲</span>
+            <span class="result-text" id="resultText">Press SPIN to begin</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="primary-btn" id="spinBtn">
+          <span class="btn-label">SPIN</span>
+          <span class="btn-sub">↵ or space</span>
+        </button>
+        <button class="ghost-btn" id="acceptBtn" disabled>✓ I'll do it</button>
+        <button class="ghost-btn" id="rerollBtn" disabled>↻ Re-roll</button>
+        <button class="ghost-btn" id="skipBtn" disabled>✕ Skip</button>
+      </div>
+    </section>
+
+    <section class="logbook">
+      <div class="logbook-head">
+        <h2>📓 Today's Logbook</h2>
+        <button class="link-btn" id="clearBtn">clear history</button>
+      </div>
+      <ul id="logList" class="log-list">
+        <li class="log-empty">No spins yet. The day is wide open.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with 🎲 randomness · <button class="link-btn" id="exportBtn">export log</button></p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
