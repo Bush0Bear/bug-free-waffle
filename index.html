@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taroker — newest build</title>
+<style>
+  :root { --bg:#080814; --gold:#c9a84c; --text:#e8e0d0; --muted:#7a7060; --purple:#7b4fd0; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--text);
+    font-family:Georgia,'Times New Roman',serif;
+    min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:2rem;
+    background-image:
+      radial-gradient(ellipse at 15% 50%, #1a0830 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 20%, #041828 0%, transparent 55%);
+  }
+  .logo { font-size:3rem; color:var(--gold); letter-spacing:.12em; text-shadow:0 0 30px #c9a84c55; }
+  .logo-sub { color:var(--muted); letter-spacing:.35em; font-size:.8rem; margin:.4rem 0 2.4rem; }
+  .card {
+    background:#0f0f24; border:1px solid #c9a84c55; border-radius:14px;
+    padding:2rem 2.2rem; max-width:520px;
+  }
+  .card h1 { color:var(--gold); font-size:1.1rem; letter-spacing:.1em; margin-bottom:1rem; }
+  .card p { color:var(--text); line-height:1.6; font-size:.95rem; margin-bottom:.8rem; }
+  .card p.muted { color:var(--muted); font-size:.85rem; margin-bottom:0; }
+  .pulse { display:inline-block; color:var(--purple); animation:pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+</style>
+</head>
+<body>
+  <div class="logo">TAROKER</div>
+  <div class="logo-sub">NEWEST BUILD</div>
+  <div class="card">
+    <h1><span class="pulse">✦</span> Build incoming <span class="pulse">✦</span></h1>
+    <p>This branch is reserved for the newest version of the game. The full build is being uploaded.</p>
+    <p class="muted">Check back shortly — once the new <code>index.html</code> lands on this branch, this page is replaced by the game.</p>
+  </div>
+</body>
+</html>
